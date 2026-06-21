@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f4f0e8" />
+    <meta
+      name="description"
+      content="輸入一句產品、故事或觀點，立即生成故事型短影音腳本。"
+    />
+    <link rel="stylesheet" href="./src/styles.css" />
+    <title>一句話生成爆款腳本</title>
+  </head>
+  <body>
+    <main>
+      <nav class="nav">
+        <a class="brand" href="#" aria-label="一句話生成爆款腳本首頁">
+          <span class="brand-mark">爆</span>
+          <span>一句成片</span>
+        </a>
+        <div class="style-badge">
+          <span class="live-dot"></span>
+          LONGER STORY FORMULA
+        </div>
+      </nav>
+
+      <div class="grain"></div>
+
+      <section class="hero">
+        <div class="eyebrow">
+          <span>01</span>
+          <span class="eyebrow-line"></span>
+          <span>60 秒故事型短影音</span>
+        </div>
+
+        <h1>一句話，<br /><em>生成爆款腳本。</em></h1>
+
+        <p class="intro">
+          丟進一個產品、一段故事，或一個你深信的觀點。<br />
+          我把它變成讓人停下來的 60 秒。
+        </p>
+
+        <form class="generator" id="generator">
+          <div class="input-wrap" id="input-wrap">
+            <span class="input-icon">✦</span>
+            <input
+              id="topic"
+              maxlength="100"
+              placeholder="例如：我爸第一次跟我借錢"
+              aria-label="輸入產品、故事或觀點"
+            />
+            <span class="count" id="count">0/100</span>
+          </div>
+          <button class="generate-button" id="generate-button" type="submit">
+            <span>生成腳本</span>
+            <span class="arrow">↗</span>
+          </button>
+        </form>
+        <p class="error-message" id="error" hidden></p>
+
+        <div class="examples">
+          <span>不知道寫什麼？試試</span>
+          <button type="button" data-example="一杯 80 元的精品豆漿">一杯 80 元的精品豆漿 <b>›</b></button>
+          <button type="button" data-example="我爸第一次跟我借錢">我爸第一次跟我借錢 <b>›</b></button>
+          <button type="button" data-example="窮人最愛省小錢">窮人最愛省小錢 <b>›</b></button>
+        </div>
+
+        <div class="formula">
+          <div><strong>早餐店老闆</strong><span>人情味</span></div>
+          <span class="multiply">×</span>
+          <div><strong>財富教練</strong><span>洞察力</span></div>
+          <span class="multiply">×</span>
+          <div><strong>故事敘事</strong><span>高留存</span></div>
+        </div>
+      </section>
+
+      <section class="result-shell" id="result" hidden>
+        <div class="result-header">
+          <div>
+            <p class="result-kicker">SCRIPT / GENERATED</p>
+            <h2>你的 60 秒腳本</h2>
+          </div>
+          <div class="result-actions">
+            <span>◷ 約 60 秒</span>
+            <button class="copy-button" type="button" data-copy="all">▣ 複製全部</button>
+          </div>
+        </div>
+
+        <div class="result-card">
+          <section class="result-section">
+            <div class="section-heading">
+              <div class="section-title"><span>01</span><h2>標題</h2></div>
+              <button class="copy-button" type="button" data-copy="title">▣ 複製</button>
+            </div>
+            <p class="title-output" id="output-title"></p>
+          </section>
+
+          <section class="result-section accent-section">
+            <div class="section-heading">
+              <div class="section-title"><span>02</span><h2>前 3 秒 Hook</h2></div>
+              <button class="copy-button" type="button" data-copy="hook">▣ 複製</button>
+            </div>
+            <blockquote id="output-hook"></blockquote>
+          </section>
+
+          <section class="result-section">
+            <div class="section-heading">
+              <div class="section-title"><span>03</span><h2>60 秒腳本</h2></div>
+              <button class="copy-button" type="button" data-copy="script">▣ 複製</button>
+            </div>
+            <div class="script-output" id="output-script"></div>
+          </section>
+
+          <section class="result-section">
+            <div class="section-heading">
+              <div class="section-title"><span>04</span><h2>畫面提示</h2></div>
+              <button class="copy-button" type="button" data-copy="visuals">▣ 複製</button>
+            </div>
+            <ol class="visual-list" id="output-visuals"></ol>
+          </section>
+
+          <section class="result-section">
+            <div class="section-heading">
+              <div class="section-title"><span>05</span><h2>CTA</h2></div>
+              <button class="copy-button" type="button" data-copy="cta">▣ 複製</button>
+            </div>
+            <p class="cta-output" id="output-cta"></p>
+          </section>
+        </div>
+
+        <button class="regenerate" id="regenerate" type="button">✦ 換一個版本</button>
+      </section>
+
+      <footer>
+        <span>LONGER STORY FORMULA™</span>
+        <span>把生意說成人生，把人生說成故事。</span>
+      </footer>
+    </main>
+    <script src="./src/scriptGenerator.js"></script>
+    <script src="./src/app.js"></script>
+  </body>
+</html>
