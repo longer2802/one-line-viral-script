@@ -8,6 +8,8 @@ const resultShell = document.querySelector("#result");
 const regenerate = document.querySelector("#regenerate");
 
 let currentResult = null;
+let currentTopic = "";
+let version = 0;
 
 const setLoading = (loading) => {
   generateButton.disabled = loading;
@@ -65,7 +67,7 @@ const render = (result) => {
   resultShell.hidden = false;
 };
 
-const generate = () => {
+const generate = (isRegenerate = false) => {
   const topic = topicInput.value.trim();
   if (!topic) {
     showError("先給我一句話，我才能幫你把故事說好。");
@@ -74,9 +76,15 @@ const generate = () => {
   }
 
   clearError();
+  if (topic !== currentTopic) {
+    currentTopic = topic;
+    version = 0;
+  } else if (isRegenerate) {
+    version += 1;
+  }
   setLoading(true);
   window.setTimeout(() => {
-    currentResult = window.generateScript(topic);
+    currentResult = window.generateScript(topic, version);
     render(currentResult);
     setLoading(false);
     resultShell.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -88,17 +96,20 @@ form.addEventListener("submit", (event) => {
   generate();
 });
 
-regenerate.addEventListener("click", generate);
+regenerate.addEventListener("click", () => generate(true));
 
 topicInput.addEventListener("input", () => {
-  count.textContent = `${topicInput.value.length}/100`;
+  count.textContent = `${topicInput.value.length}/500`;
+  topicInput.style.height = "auto";
+  topicInput.style.height = `${Math.min(topicInput.scrollHeight, 190)}px`;
   clearError();
 });
 
 document.querySelectorAll("[data-example]").forEach((button) => {
   button.addEventListener("click", () => {
     topicInput.value = button.dataset.example;
-    count.textContent = `${topicInput.value.length}/100`;
+    count.textContent = `${topicInput.value.length}/500`;
+    topicInput.dispatchEvent(new Event("input"));
     clearError();
     topicInput.focus();
   });

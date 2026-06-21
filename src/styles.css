@@ -29,7 +29,8 @@ body {
 }
 
 button,
-input {
+input,
+textarea {
   font: inherit;
 }
 
@@ -165,10 +166,10 @@ h1 em::after {
 }
 
 .input-wrap {
-  height: 72px;
-  padding: 0 20px;
+  min-height: 86px;
+  padding: 17px 20px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 13px;
   background: rgba(255, 255, 255, 0.6);
   border: 1.5px solid var(--ink);
@@ -186,34 +187,41 @@ h1 em::after {
   box-shadow: 5px 5px 0 var(--orange);
 }
 
-.input-wrap svg {
+.input-wrap svg,
+.input-icon {
   flex: 0 0 auto;
   color: var(--orange);
+  margin-top: 8px;
 }
 
-.input-wrap input {
+.input-wrap input,
+.input-wrap textarea {
   min-width: 0;
   flex: 1;
   border: 0;
   outline: 0;
+  resize: none;
   background: transparent;
   color: var(--ink);
   font-size: 17px;
   font-weight: 600;
+  line-height: 1.65;
 }
 
-.input-wrap input::placeholder {
+.input-wrap input::placeholder,
+.input-wrap textarea::placeholder {
   color: #aaa49a;
   font-weight: 500;
 }
 
 .count {
+  align-self: flex-end;
   color: #aaa49a;
   font-size: 10px;
 }
 
 .generate-button {
-  height: 72px;
+  min-height: 86px;
   min-width: 176px;
   padding: 0 24px;
   display: flex;

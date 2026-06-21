@@ -43,13 +43,14 @@
         <form class="generator" id="generator">
           <div class="input-wrap" id="input-wrap">
             <span class="input-icon">✦</span>
-            <input
+            <textarea
               id="topic"
-              maxlength="100"
-              placeholder="例如：我爸第一次跟我借錢"
+              maxlength="500"
+              rows="1"
+              placeholder="輸入一個產品、觀點，或貼上一段真實故事…"
               aria-label="輸入產品、故事或觀點"
-            />
-            <span class="count" id="count">0/100</span>
+            ></textarea>
+            <span class="count" id="count">0/500</span>
           </div>
           <button class="generate-button" id="generate-button" type="submit">
             <span>生成腳本</span>
@@ -60,9 +61,9 @@
 
         <div class="examples">
           <span>不知道寫什麼？試試</span>
-          <button type="button" data-example="一杯 80 元的精品豆漿">一杯 80 元的精品豆漿 <b>›</b></button>
-          <button type="button" data-example="我爸第一次跟我借錢">我爸第一次跟我借錢 <b>›</b></button>
-          <button type="button" data-example="窮人最愛省小錢">窮人最愛省小錢 <b>›</b></button>
+          <button type="button" data-example="新產品：一杯 80 元、使用台灣非基改黃豆現磨的精品豆漿">新產品 <b>›</b></button>
+          <button type="button" data-example="我爸第一次跟我借錢。他在電話裡一直說只差一點，後來我才知道，他已經三個月沒有領到薪水。">真實故事 <b>›</b></button>
+          <button type="button" data-example="窮人最愛省小錢，卻常常為了省眼前的一百元，付出更大的時間成本">反常識觀點 <b>›</b></button>
         </div>
 
         <div class="formula">
