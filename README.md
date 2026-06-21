@@ -2,6 +2,10 @@
 
 輸入產品、故事或觀點，自動產出標題、前 3 秒 Hook、60 秒腳本、畫面提示與 CTA。
 
+## 公開網站
+
+https://longer2802.github.io/one-line-viral-script/
+
 ## 啟動
 
 ### 在 Mac 電腦使用
