@@ -6,10 +6,10 @@
     <meta name="theme-color" content="#f4f0e8" />
     <meta
       name="description"
-      content="早餐店人生觀察室 AI 腳本生成器，將早餐店日常轉化為品牌內容。"
+      content="俊榮 Longer 專屬 IG 短影音導演，透過食物講故事、透過店家講人生。"
     />
     <link rel="stylesheet" href="./src/styles.css" />
-    <title>Breakfast Life Studio｜早餐店人生觀察室</title>
+    <title>俊榮 Longer｜IG 爆款腳本導演</title>
   </head>
   <body>
     <main>
@@ -20,7 +20,7 @@
         </a>
         <div class="style-badge">
           <span class="live-dot"></span>
-          AI 內容總監 V2
+          IG 爆款導演模式
         </div>
       </nav>
 
@@ -30,15 +30,15 @@
         <div class="eyebrow">
           <span>01</span>
           <span class="eyebrow-line"></span>
-          <span>早餐店人生觀察室</span>
+          <span>俊榮 LONGER 專屬內容總監</span>
         </div>
 
-        <h1>早餐店<br /><em>人生觀察室</em></h1>
+        <h1>不是介紹食物，<br /><em>是透過食物講故事。</em></h1>
 
-        <p class="hero-subtitle">今天發生的小事，或許就是某個人的人生縮影。</p>
+        <p class="hero-subtitle">情緒第一，故事第二，觀點第三，美食最後才出場。</p>
 
         <p class="intro intro-wide">
-          輸入一件早餐店裡發生的小事、新產品、客人互動、夥伴故事或店內活動，系統會自動拆解人性、人生、創業與品牌觀察，並生成適合 IG Reels、Facebook、Threads 的短影音腳本。
+          填入店名、美食，最好再補充一位人物、一個習慣或一段故事。系統會用俊榮 Longer 的早餐店老闆、創業家、財富教練與美食探店者視角，產出可直接拍攝的 60 秒 IG 短影音企劃。
         </p>
 
         <form class="generator" id="generator">
@@ -49,60 +49,25 @@
                 id="topic"
                 maxlength="1000"
                 rows="1"
-                placeholder="輸入今天發生的小事、新品、客人互動、夥伴故事或活動…"
-                aria-label="輸入早餐店內容素材"
+                placeholder="填入店名或美食，也可以補充老闆故事、開店年份、習慣或在地文化…"
+                aria-label="填入店名或美食主題"
               ></textarea>
               <span class="count" id="count">0/1000</span>
             </div>
             <button class="generate-button" id="generate-button" type="submit">
-              <span>生成 V2 腳本</span>
+              <span>生成爆款腳本</span>
               <span class="arrow">↗</span>
             </button>
           </div>
 
-          <fieldset class="style-selector">
-            <legend>選擇腳本風格</legend>
-            <div class="style-options">
-              <label class="style-option style-option-all">
-                <input type="radio" name="script-style" value="all" checked />
-                <span>全部生成</span>
-              </label>
-              <label class="style-option">
-                <input type="radio" name="script-style" value="visit" />
-                <span>探店版</span>
-              </label>
-              <label class="style-option">
-                <input type="radio" name="script-style" value="life" />
-                <span>早餐店人生觀察室版</span>
-              </label>
-              <label class="style-option">
-                <input type="radio" name="script-style" value="product" />
-                <span>新品上市版</span>
-              </label>
-              <label class="style-option">
-                <input type="radio" name="script-style" value="legend" />
-                <span>都市傳說版</span>
-              </label>
-              <label class="style-option">
-                <input type="radio" name="script-style" value="founder" />
-                <span>創業故事版</span>
-              </label>
-              <label class="style-option">
-                <input type="radio" name="script-style" value="comment" />
-                <span>高互動留言版</span>
-              </label>
-            </div>
-          </fieldset>
         </form>
         <p class="error-message" id="error" hidden></p>
 
         <div class="examples">
-          <span>範例素材</span>
-          <button type="button" data-example="客人問等多久，我說10分鐘，他直接離開。">客人等待 <b>›</b></button>
-          <button type="button" data-example="小朋友每次來店裡都會問有沒有貼紙。">小朋友貼紙 <b>›</b></button>
-          <button type="button" data-example="第一桌客人主動收餐盤，後面幾桌也跟著收。">主動收餐盤 <b>›</b></button>
-          <button type="button" data-example="員工一準備吃早餐，客人就突然一直進來。">早餐店傳說 <b>›</b></button>
-          <button type="button" data-example="新品：濃醇抹茶拿鐵。">濃醇抹茶拿鐵 <b>›</b></button>
+          <span>範例主題</span>
+          <button type="button" data-example="屏東九如老市場裡的一碗飯湯，老闆每天凌晨四點開始準備。">老市場飯湯 <b>›</b></button>
+          <button type="button" data-example="一對夫妻一起經營二十年的早餐店，太太記得每位熟客固定點什麼。">夫妻早餐店 <b>›</b></button>
+          <button type="button" data-example="艾格森蛋餅，客人每天上班前都會來點同一份早餐。">艾格森蛋餅 <b>›</b></button>
         </div>
 
         <div class="formula">
@@ -117,8 +82,8 @@
       <section class="result-shell" id="result" hidden>
         <div class="result-header">
           <div>
-            <p class="result-kicker">BREAKFAST LIFE STUDIO / V2</p>
-            <h2>內容總監企劃書</h2>
+            <p class="result-kicker">IG DIRECTOR / LONGER IP</p>
+            <h2>60 秒爆款拍攝企劃</h2>
           </div>
           <div class="result-actions">
             <span>✎ 所有文字皆可修改</span>
@@ -128,12 +93,12 @@
 
         <div id="result-content"></div>
 
-        <button class="regenerate" id="regenerate" type="button">✦ 重新生成不同角度</button>
+        <button class="regenerate" id="regenerate" type="button">✦ 換一種 Hook 與故事角度</button>
       </section>
 
       <footer>
-        <span>BREAKFAST LIFE STUDIO V2</span>
-        <span>黃俊榮 Longer 專屬內容總監｜從早餐店的小事，看見人生的大事。</span>
+        <span>JUNRONG LONGER IG DIRECTOR</span>
+        <span>透過食物講故事・透過店家講人生・透過創業講思維</span>
       </footer>
     </main>
     <script src="./src/scriptGenerator.js"></script>
