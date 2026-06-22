@@ -9,18 +9,18 @@
       content="輸入一句產品、故事或觀點，立即生成故事型短影音腳本。"
     />
     <link rel="stylesheet" href="./src/styles.css" />
-    <title>一句話生成爆款腳本</title>
+    <title>Breakfast Life Studio｜早餐店人生觀察室</title>
   </head>
   <body>
     <main>
       <nav class="nav">
         <a class="brand" href="#" aria-label="一句話生成爆款腳本首頁">
           <span class="brand-mark">爆</span>
-          <span>一句成片</span>
+          <span>BREAKFAST LIFE STUDIO</span>
         </a>
         <div class="style-badge">
           <span class="live-dot"></span>
-          LONGER STORY FORMULA
+          AI 內容總監 v1.0
         </div>
       </nav>
 
@@ -30,14 +30,14 @@
         <div class="eyebrow">
           <span>01</span>
           <span class="eyebrow-line"></span>
-          <span>60 秒故事型短影音</span>
+          <span>早餐店人生觀察室</span>
         </div>
 
-        <h1>一句話，<br /><em>生成爆款腳本。</em></h1>
+        <h1>一件小事，<br /><em>看見一段人生。</em></h1>
 
         <p class="intro">
-          丟進一個產品、一段故事，或一個你深信的觀點。<br />
-          我把它變成讓人停下來的 60 秒。
+          放進早餐店發生的人事物、新品或一段觀察。<br />
+          內容總監會先拆解人性，再產出四種可直接修改的拍攝腳本。
         </p>
 
         <form class="generator" id="generator">
@@ -45,15 +45,15 @@
             <span class="input-icon">✦</span>
             <textarea
               id="topic"
-              maxlength="500"
+              maxlength="1000"
               rows="1"
-              placeholder="輸入一個產品、觀點，或貼上一段真實故事…"
+              placeholder="例如：客人等了 10 分鐘，因為不知道還要等多久，最後直接離開…"
               aria-label="輸入產品、故事或觀點"
             ></textarea>
-            <span class="count" id="count">0/500</span>
+            <span class="count" id="count">0/1000</span>
           </div>
           <button class="generate-button" id="generate-button" type="submit">
-            <span>生成腳本</span>
+            <span>生成內容企劃</span>
             <span class="arrow">↗</span>
           </button>
         </form>
@@ -61,9 +61,9 @@
 
         <div class="examples">
           <span>不知道寫什麼？試試</span>
-          <button type="button" data-example="新產品：一杯 80 元、使用台灣非基改黃豆現磨的精品豆漿">新產品 <b>›</b></button>
-          <button type="button" data-example="我爸第一次跟我借錢。他在電話裡一直說只差一點，後來我才知道，他已經三個月沒有領到薪水。">真實故事 <b>›</b></button>
-          <button type="button" data-example="窮人最愛省小錢，卻常常為了省眼前的一百元，付出更大的時間成本">反常識觀點 <b>›</b></button>
+          <button type="button" data-example="今天有一位客人等了 10 分鐘，因為不知道餐點還要多久，最後直接離開。">客人等待 <b>›</b></button>
+          <button type="button" data-example="一個小朋友每次來店裡都在找上次拿到的貼紙，今天拿到新貼紙時非常開心，媽媽也跟著笑了。">小朋友貼紙 <b>›</b></button>
+          <button type="button" data-example="新品：艾格森準備推出一款加入屏東在地食材的新口味蛋餅，希望讓外地客人也能吃到九如的味道。">在地新品 <b>›</b></button>
         </div>
 
         <div class="formula">
@@ -79,62 +79,22 @@
         <div class="result-header">
           <div>
             <p class="result-kicker">SCRIPT / GENERATED</p>
-            <h2>你的 60 秒腳本</h2>
+              <h2>內容總監企劃書</h2>
           </div>
           <div class="result-actions">
-            <span>◷ 約 60 秒</span>
-            <button class="copy-button" type="button" data-copy="all">▣ 複製全部</button>
+            <span>✎ 所有文字皆可修改</span>
+            <button class="copy-button" id="copy-all" type="button">▣ 複製全部</button>
           </div>
         </div>
 
-        <div class="result-card">
-          <section class="result-section">
-            <div class="section-heading">
-              <div class="section-title"><span>01</span><h2>標題</h2></div>
-              <button class="copy-button" type="button" data-copy="title">▣ 複製</button>
-            </div>
-            <p class="title-output" id="output-title"></p>
-          </section>
+        <div id="result-content"></div>
 
-          <section class="result-section accent-section">
-            <div class="section-heading">
-              <div class="section-title"><span>02</span><h2>前 3 秒 Hook</h2></div>
-              <button class="copy-button" type="button" data-copy="hook">▣ 複製</button>
-            </div>
-            <blockquote id="output-hook"></blockquote>
-          </section>
-
-          <section class="result-section">
-            <div class="section-heading">
-              <div class="section-title"><span>03</span><h2>60 秒腳本</h2></div>
-              <button class="copy-button" type="button" data-copy="script">▣ 複製</button>
-            </div>
-            <div class="script-output" id="output-script"></div>
-          </section>
-
-          <section class="result-section">
-            <div class="section-heading">
-              <div class="section-title"><span>04</span><h2>畫面提示</h2></div>
-              <button class="copy-button" type="button" data-copy="visuals">▣ 複製</button>
-            </div>
-            <ol class="visual-list" id="output-visuals"></ol>
-          </section>
-
-          <section class="result-section">
-            <div class="section-heading">
-              <div class="section-title"><span>05</span><h2>CTA</h2></div>
-              <button class="copy-button" type="button" data-copy="cta">▣ 複製</button>
-            </div>
-            <p class="cta-output" id="output-cta"></p>
-          </section>
-        </div>
-
-        <button class="regenerate" id="regenerate" type="button">✦ 換一個版本</button>
+        <button class="regenerate" id="regenerate" type="button">✦ 換一組企劃角度</button>
       </section>
 
       <footer>
-        <span>LONGER STORY FORMULA™</span>
-        <span>把生意說成人生，把人生說成故事。</span>
+        <span>BREAKFAST LIFE STUDIO v1.0</span>
+        <span>從早餐店的小事，看見人生的大事。</span>
       </footer>
     </main>
     <script src="./src/scriptGenerator.js"></script>

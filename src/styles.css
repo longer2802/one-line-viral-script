@@ -365,6 +365,228 @@ h1 em::after {
   font-size: 12px;
 }
 
+.result-meta {
+  margin-bottom: 24px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.result-meta span {
+  padding: 7px 11px;
+  border: 1px solid var(--line);
+  border-radius: 99px;
+  color: #6c665d;
+  background: rgba(255, 255, 255, 0.42);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.block-label {
+  margin-bottom: 9px;
+  color: var(--orange);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.2em;
+}
+
+.block-title-row {
+  margin-bottom: 24px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.block-title-row h2 {
+  margin: 0;
+  font-family: "Noto Serif TC", serif;
+  font-size: clamp(25px, 4vw, 38px);
+}
+
+.block-title-row span {
+  color: #8c867c;
+  font-size: 11px;
+}
+
+.analysis-block {
+  margin-bottom: 75px;
+}
+
+.analysis-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-top: 1.5px solid var(--ink);
+  border-left: 1.5px solid var(--ink);
+  box-shadow: 7px 7px 0 var(--ink);
+}
+
+.analysis-card {
+  min-height: 230px;
+  padding: 27px 28px;
+  border-right: 1.5px solid var(--ink);
+  border-bottom: 1.5px solid var(--ink);
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.analysis-card:nth-child(5) {
+  grid-column: 1 / -1;
+  min-height: auto;
+  background: var(--orange);
+  color: #fff;
+}
+
+.analysis-card:nth-child(5) .section-title span,
+.analysis-card:nth-child(5) .copy-button {
+  color: #fff;
+}
+
+.analysis-card:nth-child(5) .copy-button {
+  border-color: rgba(255, 255, 255, 0.42);
+}
+
+.analysis-card p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.9;
+}
+
+.scripts-block {
+  margin-top: 20px;
+}
+
+.scripts-list {
+  display: grid;
+  gap: 35px;
+}
+
+.script-card {
+  overflow: hidden;
+  border: 1.5px solid var(--ink);
+  background: rgba(255, 255, 255, 0.5);
+  box-shadow: 8px 8px 0 var(--ink);
+}
+
+.script-card-top {
+  padding: 24px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  background: var(--ink);
+  color: #fff;
+}
+
+.script-card-top > div > span {
+  display: block;
+  margin-bottom: 5px;
+  color: #f58b70;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+}
+
+.script-card-top h3 {
+  margin: 0;
+  font-family: "Noto Serif TC", serif;
+  font-size: 23px;
+}
+
+.script-card-top .copy-button {
+  flex: 0 0 auto;
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.script-field {
+  padding: 27px 30px;
+  display: grid;
+  grid-template-columns: 115px minmax(0, 1fr);
+  gap: 20px;
+  border-bottom: 1px solid var(--line);
+}
+
+.script-field:last-child {
+  border-bottom: 0;
+}
+
+.script-field h4 {
+  margin: 5px 0 0;
+  color: var(--orange);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+}
+
+.script-field > p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.9;
+}
+
+.script-field-title > p {
+  font-family: "Noto Serif TC", serif;
+  font-size: 25px;
+  font-weight: 900;
+  line-height: 1.5;
+}
+
+.script-field-hook {
+  background: #fff3ed;
+}
+
+.hook-editable {
+  font-family: "Noto Serif TC", serif;
+  font-size: 20px !important;
+  font-weight: 900;
+}
+
+.script-field ol,
+.script-field ul {
+  margin: 0;
+  padding-left: 22px;
+}
+
+.script-field li {
+  padding: 7px 0;
+  line-height: 1.75;
+}
+
+.script-field-voiceover li {
+  margin-bottom: 8px;
+}
+
+.script-field-subtitles {
+  background: rgba(25, 24, 21, 0.035);
+}
+
+.script-field-cta p {
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.editable {
+  border-radius: 4px;
+  outline: 1px dashed transparent;
+  outline-offset: 5px;
+  transition: 0.16s ease;
+}
+
+.editable:hover {
+  outline-color: rgba(240, 74, 36, 0.45);
+  background: rgba(240, 74, 36, 0.04);
+}
+
+.editable:focus {
+  outline: 2px solid var(--orange);
+  background: #fff;
+  color: var(--ink);
+}
+
+.editable:focus::selection {
+  background: rgba(240, 74, 36, 0.22);
+}
+
 .result-card {
   border: 1.5px solid var(--ink);
   background: rgba(255, 255, 255, 0.46);
@@ -610,6 +832,52 @@ footer {
   .result-actions {
     width: 100%;
     justify-content: space-between;
+  }
+
+  .block-title-row {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .analysis-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .analysis-card:nth-child(5) {
+    grid-column: auto;
+  }
+
+  .analysis-card {
+    min-height: auto;
+    padding: 24px 21px;
+  }
+
+  .script-card-top {
+    padding: 21px 20px;
+    align-items: flex-start;
+  }
+
+  .script-card-top h3 {
+    font-size: 19px;
+  }
+
+  .script-card-top .copy-button {
+    font-size: 9px;
+  }
+
+  .script-field {
+    padding: 24px 20px;
+    grid-template-columns: 1fr;
+    gap: 11px;
+  }
+
+  .script-field h4 {
+    margin: 0;
+  }
+
+  .script-field-title > p {
+    font-size: 21px;
   }
 
   footer {
