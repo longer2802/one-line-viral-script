@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#f4f0e8" />
     <meta
       name="description"
-      content="輸入一句產品、故事或觀點，立即生成故事型短影音腳本。"
+      content="早餐店人生觀察室 AI 腳本生成器，將早餐店日常轉化為品牌內容。"
     />
     <link rel="stylesheet" href="./src/styles.css" />
     <title>Breakfast Life Studio｜早餐店人生觀察室</title>
@@ -14,13 +14,13 @@
   <body>
     <main>
       <nav class="nav">
-        <a class="brand" href="#" aria-label="一句話生成爆款腳本首頁">
+        <a class="brand" href="#" aria-label="早餐店人生觀察室首頁">
           <span class="brand-mark">爆</span>
           <span>BREAKFAST LIFE STUDIO</span>
         </a>
         <div class="style-badge">
           <span class="live-dot"></span>
-          AI 內容總監 v1.0
+          AI 內容總監 V2
         </div>
       </nav>
 
@@ -33,37 +33,76 @@
           <span>早餐店人生觀察室</span>
         </div>
 
-        <h1>一件小事，<br /><em>看見一段人生。</em></h1>
+        <h1>早餐店<br /><em>人生觀察室</em></h1>
 
-        <p class="intro">
-          放進早餐店發生的人事物、新品或一段觀察。<br />
-          內容總監會先拆解人性，再產出四種可直接修改的拍攝腳本。
+        <p class="hero-subtitle">今天發生的小事，或許就是某個人的人生縮影。</p>
+
+        <p class="intro intro-wide">
+          輸入一件早餐店裡發生的小事、新產品、客人互動、夥伴故事或店內活動，系統會自動拆解人性、人生、創業與品牌觀察，並生成適合 IG Reels、Facebook、Threads 的短影音腳本。
         </p>
 
         <form class="generator" id="generator">
-          <div class="input-wrap" id="input-wrap">
-            <span class="input-icon">✦</span>
-            <textarea
-              id="topic"
-              maxlength="1000"
-              rows="1"
-              placeholder="例如：客人等了 10 分鐘，因為不知道還要等多久，最後直接離開…"
-              aria-label="輸入產品、故事或觀點"
-            ></textarea>
-            <span class="count" id="count">0/1000</span>
+          <div class="generator-row">
+            <div class="input-wrap" id="input-wrap">
+              <span class="input-icon">✦</span>
+              <textarea
+                id="topic"
+                maxlength="1000"
+                rows="1"
+                placeholder="輸入今天發生的小事、新品、客人互動、夥伴故事或活動…"
+                aria-label="輸入早餐店內容素材"
+              ></textarea>
+              <span class="count" id="count">0/1000</span>
+            </div>
+            <button class="generate-button" id="generate-button" type="submit">
+              <span>生成 V2 腳本</span>
+              <span class="arrow">↗</span>
+            </button>
           </div>
-          <button class="generate-button" id="generate-button" type="submit">
-            <span>生成內容企劃</span>
-            <span class="arrow">↗</span>
-          </button>
+
+          <fieldset class="style-selector">
+            <legend>選擇腳本風格</legend>
+            <div class="style-options">
+              <label class="style-option style-option-all">
+                <input type="radio" name="script-style" value="all" checked />
+                <span>全部生成</span>
+              </label>
+              <label class="style-option">
+                <input type="radio" name="script-style" value="visit" />
+                <span>探店版</span>
+              </label>
+              <label class="style-option">
+                <input type="radio" name="script-style" value="life" />
+                <span>早餐店人生觀察室版</span>
+              </label>
+              <label class="style-option">
+                <input type="radio" name="script-style" value="product" />
+                <span>新品上市版</span>
+              </label>
+              <label class="style-option">
+                <input type="radio" name="script-style" value="legend" />
+                <span>都市傳說版</span>
+              </label>
+              <label class="style-option">
+                <input type="radio" name="script-style" value="founder" />
+                <span>創業故事版</span>
+              </label>
+              <label class="style-option">
+                <input type="radio" name="script-style" value="comment" />
+                <span>高互動留言版</span>
+              </label>
+            </div>
+          </fieldset>
         </form>
         <p class="error-message" id="error" hidden></p>
 
         <div class="examples">
-          <span>不知道寫什麼？試試</span>
-          <button type="button" data-example="今天有一位客人等了 10 分鐘，因為不知道餐點還要多久，最後直接離開。">客人等待 <b>›</b></button>
-          <button type="button" data-example="一個小朋友每次來店裡都在找上次拿到的貼紙，今天拿到新貼紙時非常開心，媽媽也跟著笑了。">小朋友貼紙 <b>›</b></button>
-          <button type="button" data-example="新品：艾格森準備推出一款加入屏東在地食材的新口味蛋餅，希望讓外地客人也能吃到九如的味道。">在地新品 <b>›</b></button>
+          <span>範例素材</span>
+          <button type="button" data-example="客人問等多久，我說10分鐘，他直接離開。">客人等待 <b>›</b></button>
+          <button type="button" data-example="小朋友每次來店裡都會問有沒有貼紙。">小朋友貼紙 <b>›</b></button>
+          <button type="button" data-example="第一桌客人主動收餐盤，後面幾桌也跟著收。">主動收餐盤 <b>›</b></button>
+          <button type="button" data-example="員工一準備吃早餐，客人就突然一直進來。">早餐店傳說 <b>›</b></button>
+          <button type="button" data-example="新品：濃醇抹茶拿鐵。">濃醇抹茶拿鐵 <b>›</b></button>
         </div>
 
         <div class="formula">
@@ -78,8 +117,8 @@
       <section class="result-shell" id="result" hidden>
         <div class="result-header">
           <div>
-            <p class="result-kicker">SCRIPT / GENERATED</p>
-              <h2>內容總監企劃書</h2>
+            <p class="result-kicker">BREAKFAST LIFE STUDIO / V2</p>
+            <h2>內容總監企劃書</h2>
           </div>
           <div class="result-actions">
             <span>✎ 所有文字皆可修改</span>
@@ -89,12 +128,12 @@
 
         <div id="result-content"></div>
 
-        <button class="regenerate" id="regenerate" type="button">✦ 換一組企劃角度</button>
+        <button class="regenerate" id="regenerate" type="button">✦ 重新生成不同角度</button>
       </section>
 
       <footer>
-        <span>BREAKFAST LIFE STUDIO v1.0</span>
-        <span>從早餐店的小事，看見人生的大事。</span>
+        <span>BREAKFAST LIFE STUDIO V2</span>
+        <span>黃俊榮 Longer 專屬內容總監｜從早餐店的小事，看見人生的大事。</span>
       </footer>
     </main>
     <script src="./src/scriptGenerator.js"></script>
