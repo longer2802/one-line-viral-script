@@ -59,6 +59,16 @@
               <span class="arrow">↗</span>
             </button>
           </div>
+          <div class="api-access" id="api-access" hidden>
+            <label for="api-password">AI 存取碼</label>
+            <input
+              id="api-password"
+              type="password"
+              autocomplete="current-password"
+              placeholder="輸入私人存取碼"
+            />
+            <span>只暫存在目前分頁，不是 OpenAI API Key。</span>
+          </div>
 
         </form>
         <p class="error-message" id="error" hidden></p>
@@ -86,7 +96,7 @@
             <h2>60 秒爆款拍攝企劃</h2>
           </div>
           <div class="result-actions">
-            <span>✎ 所有文字皆可修改</span>
+            <span id="ai-status">● 準備連接 AI</span>
             <button class="copy-button" id="copy-all" type="button">▣ 複製全部</button>
           </div>
         </div>
@@ -101,6 +111,7 @@
         <span>透過食物講故事・透過店家講人生・透過創業講思維</span>
       </footer>
     </main>
+    <script src="./src/config.js"></script>
     <script src="./src/scriptGenerator.js"></script>
     <script src="./src/app.js"></script>
   </body>
