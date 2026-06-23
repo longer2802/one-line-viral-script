@@ -7,6 +7,9 @@ const error = document.querySelector("#error");
 const resultShell = document.querySelector("#result");
 const resultContent = document.querySelector("#result-content");
 const regenerate = document.querySelector("#regenerate");
+const aiStatus = document.querySelector("#ai-status");
+const apiAccess = document.querySelector("#api-access");
+const apiPassword = document.querySelector("#api-password");
 
 let currentTopic = "";
 let version = 0;
@@ -15,6 +18,18 @@ function setLoading(loading) {
   generateButton.disabled = loading;
   regenerate.disabled = loading;
   generateButton.querySelector("span").textContent = loading ? "導演企劃中..." : "生成爆款腳本";
+}
+
+function setAiStatus(mode, detail = "") {
+  const states = {
+    ai: ["● AI 動態生成", "status-ai"],
+    fallback: ["● 本機備援生成", "status-fallback"],
+    connecting: ["● AI 分析中", "status-connecting"],
+    unavailable: ["● AI 尚未連接", "status-unavailable"],
+  };
+  const [label, className] = states[mode] || states.unavailable;
+  aiStatus.textContent = detail ? `${label}｜${detail}` : label;
+  aiStatus.className = className;
 }
 
 function editable(tag, text, className = "") {
@@ -78,6 +93,34 @@ function listCard(number, title, values, className = "") {
   return card;
 }
 
+function renderAnalysis(analysis) {
+  const labels = [
+    ["情緒核心", analysis.emotional_core],
+    ["故事角度", analysis.story_angle],
+    ["人性洞察", analysis.human_insight],
+    ["上一層思維", analysis.upper_mindset],
+    ["美食出場策略", analysis.food_reveal_strategy],
+    ["觀眾互動觸發", analysis.audience_trigger],
+  ];
+  const block = document.createElement("section");
+  block.className = "ai-analysis-block";
+  const heading = document.createElement("div");
+  heading.className = "block-title-row";
+  heading.innerHTML = `<h2>AI 導演分析</h2><span>先理解情緒與故事，再開始寫</span>`;
+  block.append(heading);
+  const grid = document.createElement("div");
+  grid.className = "ai-analysis-grid";
+  labels.forEach(([label, value], index) => {
+    const card = document.createElement("article");
+    card.className = "analysis-mini-card copy-scope";
+    card.append(cardHeading(String(index + 1).padStart(2, "0"), label));
+    card.append(editable("p", value));
+    grid.append(card);
+  });
+  block.append(grid);
+  return block;
+}
+
 function renderShots(shots) {
   const block = document.createElement("section");
   block.className = "shots-block";
@@ -124,6 +167,7 @@ function render(result) {
     <span>${result.meta.priority}</span>
   `;
   resultContent.append(meta);
+  if (result.analysis) resultContent.append(renderAnalysis(result.analysis));
 
   const mainGrid = document.createElement("div");
   mainGrid.className = "director-grid";
@@ -146,7 +190,31 @@ function render(result) {
   resultShell.hidden = false;
 }
 
-function generate(isRegenerate = false) {
+function normalizeAiResult(result) {
+  return {
+    ...result,
+    script60: result.script_lines.join("\n"),
+    pinnedComment: result.pinned_comment,
+  };
+}
+
+async function requestAi(topic, currentVersion) {
+  const baseUrl = String(window.APP_CONFIG?.apiBaseUrl || "").replace(/\/$/, "");
+  if (!baseUrl) throw new Error("API_NOT_CONFIGURED");
+  const response = await fetch(`${baseUrl}/api/generate`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "X-App-Password": apiPassword.value,
+    },
+    body: JSON.stringify({ topic, version: currentVersion }),
+  });
+  const data = await response.json().catch(() => ({}));
+  if (!response.ok || !data.result) throw new Error(data.error || "AI_REQUEST_FAILED");
+  return { result: normalizeAiResult(data.result), model: data.model || "OpenAI" };
+}
+
+async function generate(isRegenerate = false) {
   const topic = topicInput.value.trim();
   if (!topic) {
     error.textContent = "請填入店名、美食，最好再補充一個人物、習慣或故事細節。";
@@ -164,11 +232,19 @@ function generate(isRegenerate = false) {
     version += 1;
   }
   setLoading(true);
-  window.setTimeout(() => {
+  setAiStatus("connecting");
+  try {
+    const ai = await requestAi(topic, version);
+    render(ai.result);
+    setAiStatus("ai", ai.model);
+  } catch (apiError) {
+    console.warn("AI fallback:", apiError.message);
     render(window.generateDirectorScript(topic, version));
+    setAiStatus("fallback", apiError.message === "API_NOT_CONFIGURED" ? "後端尚未設定" : "AI 暫時無法使用");
+  } finally {
     setLoading(false);
     resultShell.scrollIntoView({ behavior: "smooth", block: "start" });
-  }, 600);
+  }
 }
 
 form.addEventListener("submit", (event) => {
@@ -202,3 +278,13 @@ document.querySelectorAll("[data-example]").forEach((button) => {
     topicInput.focus();
   });
 });
+
+if (window.APP_CONFIG?.apiBaseUrl) {
+  apiAccess.hidden = false;
+  apiPassword.value = sessionStorage.getItem("longer-ai-access") || "";
+  apiPassword.addEventListener("input", () => {
+    sessionStorage.setItem("longer-ai-access", apiPassword.value);
+  });
+}
+
+setAiStatus(window.APP_CONFIG?.apiBaseUrl ? "unavailable" : "fallback", window.APP_CONFIG?.apiBaseUrl ? "等待生成" : "後端尚未設定");
