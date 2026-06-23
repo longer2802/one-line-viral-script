@@ -265,6 +265,43 @@ h1 em::after {
   opacity: 0.7;
 }
 
+.api-access {
+  margin-top: 16px;
+  padding: 13px 15px;
+  display: grid;
+  grid-template-columns: auto minmax(170px, 260px) 1fr;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.api-access[hidden] {
+  display: none;
+}
+
+.api-access label {
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.api-access input {
+  width: 100%;
+  padding: 9px 11px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.7);
+  outline: 0;
+}
+
+.api-access input:focus {
+  border-color: var(--orange);
+}
+
+.api-access span {
+  color: #8b857a;
+  font-size: 10px;
+}
+
 .style-selector {
   margin: 26px 0 0;
   padding: 0;
@@ -444,6 +481,45 @@ h1 em::after {
   gap: 6px;
   color: #777166;
   font-size: 12px;
+}
+
+.status-ai {
+  color: #247a42 !important;
+}
+
+.status-connecting {
+  color: var(--orange) !important;
+}
+
+.status-fallback,
+.status-unavailable {
+  color: #8c6a22 !important;
+}
+
+.ai-analysis-block {
+  margin: 20px 0 60px;
+}
+
+.ai-analysis-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1.5px solid var(--ink);
+  border-left: 1.5px solid var(--ink);
+  box-shadow: 7px 7px 0 var(--ink);
+}
+
+.analysis-mini-card {
+  min-height: 205px;
+  padding: 23px 24px;
+  border-right: 1.5px solid var(--ink);
+  border-bottom: 1.5px solid var(--ink);
+  background: rgba(255, 255, 255, 0.52);
+}
+
+.analysis-mini-card p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.85;
 }
 
 .result-meta {
@@ -1348,6 +1424,11 @@ footer {
     grid-template-columns: 1fr 1fr;
   }
 
+  .api-access {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
   .style-option span {
     justify-content: center;
     text-align: center;
@@ -1449,6 +1530,15 @@ footer {
 
   .director-grid {
     grid-template-columns: 1fr;
+  }
+
+  .ai-analysis-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .analysis-mini-card {
+    min-height: auto;
+    padding: 22px 20px;
   }
 
   .director-card {
