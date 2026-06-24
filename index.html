@@ -38,10 +38,20 @@
         <p class="hero-subtitle">情緒第一，故事第二，觀點第三，美食最後才出場。</p>
 
         <p class="intro intro-wide">
-          填入店名、美食，最好再補充一位人物、一個習慣或一段故事。系統會用俊榮 Longer 的早餐店老闆、創業家、財富教練與美食探店者視角，產出可直接拍攝的 60 秒 IG 短影音企劃。
+          選擇腳本模式，輸入店家故事、產品觀察，或來賓背景。系統會透過 AI 用俊榮 Longer 的早餐店老闆、創業家、財富教練與美食探店者視角，產出可直接拍攝的短影音企劃。
         </p>
 
         <form class="generator" id="generator">
+          <div class="mode-switch" aria-label="腳本模式">
+            <label>
+              <input type="radio" name="script-mode" value="director" checked />
+              <span>IG 爆款導演</span>
+            </label>
+            <label>
+              <input type="radio" name="script-mode" value="interview" />
+              <span>早餐桌上的人生訪談</span>
+            </label>
+          </div>
           <div class="generator-row">
             <div class="input-wrap" id="input-wrap">
               <span class="input-icon">✦</span>
@@ -78,6 +88,11 @@
           <button type="button" data-example="屏東九如老市場裡的一碗飯湯，老闆每天凌晨四點開始準備。">老市場飯湯 <b>›</b></button>
           <button type="button" data-example="一對夫妻一起經營二十年的早餐店，太太記得每位熟客固定點什麼。">夫妻早餐店 <b>›</b></button>
           <button type="button" data-example="艾格森蛋餅，客人每天上班前都會來點同一份早餐。">艾格森蛋餅 <b>›</b></button>
+          <button
+            type="button"
+            data-mode="interview"
+            data-example="來賓：冷氣師傅，35歲，總是帶著微笑。收入約月薪6萬，最辛苦的是每天在戶外爬上爬下修冷氣。夢想是開自己的冷氣行，最想改變的是多一點時間陪家人。"
+          >訪談來賓 <b>›</b></button>
         </div>
 
         <div class="formula">
