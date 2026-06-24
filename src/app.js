@@ -10,14 +10,45 @@ const regenerate = document.querySelector("#regenerate");
 const aiStatus = document.querySelector("#ai-status");
 const apiAccess = document.querySelector("#api-access");
 const apiPassword = document.querySelector("#api-password");
+const modeInputs = [...document.querySelectorAll('input[name="script-mode"]')];
 
 let currentTopic = "";
+let currentMode = "director";
 let version = 0;
+
+const modeConfig = {
+  director: {
+    loading: "導演企劃中...",
+    button: "生成爆款腳本",
+    empty: "請填入店名、美食，最好再補充一個人物、習慣或故事細節。",
+    placeholder: "填入店名或美食，也可以補充老闆故事、開店年份、習慣或在地文化…",
+    resultTitle: "60 秒爆款拍攝企劃",
+  },
+  interview: {
+    loading: "訪談企劃中...",
+    button: "生成訪談腳本",
+    empty: "請填入來賓身份、年齡、特徵、收入描述、辛苦處、夢想或想改變的事。",
+    placeholder: "填入來賓背景，例如：冷氣師傅，35歲，收入約6萬，最辛苦的是戶外爬高修冷氣，夢想開自己的店…",
+    resultTitle: "早餐桌上的人生訪談企劃",
+  },
+};
+
+function getMode() {
+  return modeInputs.find((input) => input.checked)?.value || "director";
+}
+
+function applyMode(mode) {
+  const config = modeConfig[mode] || modeConfig.director;
+  topicInput.placeholder = config.placeholder;
+  generateButton.querySelector("span").textContent = config.button;
+  document.querySelector(".result-header h2").textContent = config.resultTitle;
+}
 
 function setLoading(loading) {
   generateButton.disabled = loading;
   regenerate.disabled = loading;
-  generateButton.querySelector("span").textContent = loading ? "導演企劃中..." : "生成爆款腳本";
+  const config = modeConfig[getMode()] || modeConfig.director;
+  generateButton.querySelector("span").textContent = loading ? config.loading : config.button;
 }
 
 function setAiStatus(mode, detail = "") {
@@ -198,7 +229,7 @@ function normalizeAiResult(result) {
   };
 }
 
-async function requestAi(topic, currentVersion) {
+async function requestAi(topic, currentVersion, mode) {
   const baseUrl = String(window.APP_CONFIG?.apiBaseUrl || "").replace(/\/$/, "");
   if (!baseUrl) throw new Error("API_NOT_CONFIGURED");
   const response = await fetch(`${baseUrl}/api/generate`, {
@@ -207,7 +238,7 @@ async function requestAi(topic, currentVersion) {
       "Content-Type": "application/json",
       "X-App-Password": apiPassword.value,
     },
-    body: JSON.stringify({ topic, version: currentVersion }),
+    body: JSON.stringify({ topic, version: currentVersion, mode }),
   });
   const data = await response.json().catch(() => ({}));
   if (!response.ok || !data.result) throw new Error(data.error || "AI_REQUEST_FAILED");
@@ -216,8 +247,10 @@ async function requestAi(topic, currentVersion) {
 
 async function generate(isRegenerate = false) {
   const topic = topicInput.value.trim();
+  const mode = getMode();
+  const config = modeConfig[mode] || modeConfig.director;
   if (!topic) {
-    error.textContent = "請填入店名、美食，最好再補充一個人物、習慣或故事細節。";
+    error.textContent = config.empty;
     error.hidden = false;
     inputWrap.classList.add("has-error");
     topicInput.focus();
@@ -225,8 +258,9 @@ async function generate(isRegenerate = false) {
   }
   error.hidden = true;
   inputWrap.classList.remove("has-error");
-  if (topic !== currentTopic) {
+  if (topic !== currentTopic || mode !== currentMode) {
     currentTopic = topic;
+    currentMode = mode;
     version = 0;
   } else if (isRegenerate) {
     version += 1;
@@ -234,7 +268,7 @@ async function generate(isRegenerate = false) {
   setLoading(true);
   setAiStatus("connecting");
   try {
-    const ai = await requestAi(topic, version);
+    const ai = await requestAi(topic, version, mode);
     render(ai.result);
     setAiStatus("ai", ai.model);
   } catch (apiError) {
@@ -273,9 +307,22 @@ topicInput.addEventListener("input", () => {
 
 document.querySelectorAll("[data-example]").forEach((button) => {
   button.addEventListener("click", () => {
+    if (button.dataset.mode) {
+      const target = modeInputs.find((input) => input.value === button.dataset.mode);
+      if (target) {
+        target.checked = true;
+        applyMode(target.value);
+      }
+    }
     topicInput.value = button.dataset.example;
     topicInput.dispatchEvent(new Event("input"));
     topicInput.focus();
+  });
+});
+
+modeInputs.forEach((input) => {
+  input.addEventListener("change", () => {
+    applyMode(getMode());
   });
 });
 
@@ -287,4 +334,5 @@ if (window.APP_CONFIG?.apiBaseUrl) {
   });
 }
 
+applyMode(getMode());
 setAiStatus(window.APP_CONFIG?.apiBaseUrl ? "unavailable" : "fallback", window.APP_CONFIG?.apiBaseUrl ? "等待生成" : "後端尚未設定");
